@@ -10,3 +10,47 @@ body {
   margin: 0;
   min-height: 100%;
 }
+
+@font-face {
+  font-family: 'Seven Segment';
+  src: url('data/Seven Segment.ttf');
+}
+
+.calculatorContainer {
+  display: flex;
+  flex-wrap: wrap;
+  height: 300px;
+  width: 250px;
+  border: 1px solid black;
+}
+
+.display {
+  width: 100%;
+  /* border: 1px solid black; */
+  height: 20%;
+  font: courier;
+  text-align: right;
+  font-size: 3rem;
+  align-self: flex-end;
+  font-family: 'Seven Segment';
+}
+
+.keysContainer {
+  display: flex;
+  flex-wrap: wrap;
+  height: 80%;
+  /* border: 1px solid black; */
+}
+
+.w25 {
+  width: 25%;
+}
+
+.w75 {
+  width: 75%;
+}
+
+.calcKey {
+  font-size: 2rem;
+  font-weight: bold;
+}
