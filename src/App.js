@@ -13,6 +13,8 @@ const App = () => {
   const [display, setDisplay] = useState('0')
   const [prevKeypress, setPrevKeypress] = useState()
   const [operator, setOperator] = useState('+')
+  const [history, setHistory] = useState([])
+
   // const [nextOperator, setNextOperator] = useState()
   // const [prevOperator, setPrevOperator] = useState('+')
 
@@ -53,7 +55,12 @@ const App = () => {
       case  '*':
       case  '/':
       case  '÷':
-                setDisplay(prev => {return operate(Number(prevDisplay), Number(prev))})
+                history.unshift(prevDisplay + ' ' + operator + ' ' + display + ' = ')
+                console.log ({prevDisplay, operator, display})
+                setDisplay(prev => {const val = operate(Number(prevDisplay), Number(prev))
+                                    history[0] = history[0] + val
+                                    return val})
+                
                 setPrevDisplay(display)
                 setOperator(val)
                 break
@@ -83,25 +90,36 @@ const App = () => {
 
   // prettier-ignore
   return (
-  <main className="calculatorContainer">
-    <section className="display">{formatDisp(display)}</section>
-    <section className="keysContainer">
-      {calcKeys.map(k => {
-        return <KeyPad 
-          key={k.label}
-          className={'calcKey ' + k.width} 
-          label={k.label}
-          handleKeyClick={onKeyClickWrapper}
-          value={k.label}
-        />
-      })}
-    </section>
-    <KeyboardEventHandler
-    // handleKeys={'c0123456789+-*/x.'.split('')}
-    handleKeys={['numeric','+','-','/','x','.','shift+plus','c','*']}
-    onKeyEvent={(key, e) => { onKeyClick(key)}}
-  />
-  </main>
+    <main className="main">
+      <section className="calculatorContainer">
+        <section className="display">{formatDisp(display)}</section>
+        <section className="keysContainer">
+          {calcKeys.map(k => {
+            return <KeyPad 
+              key={k.label}
+              className={'calcKey ' + k.width} 
+              label={k.label}
+              handleKeyClick={onKeyClickWrapper}
+              value={k.label}
+            />
+          })}
+        </section>
+        <KeyboardEventHandler
+        // handleKeys={'c0123456789+-*/x.'.split('')}
+        handleKeys={['numeric','+','-','/','x','.','shift+plus','c','*']}
+        onKeyEvent={(key, e) => { onKeyClick(key)}}
+        isExclusive={true}
+      />
+      </section>
+      <section className="history">
+        Calculation History:
+        <ul className="historyList">
+          {history.map((op, index) => {
+            return <li key={index}>{op}</li>
+          })}
+        </ul>
+      </section>
+    </main>
   )
 }
 

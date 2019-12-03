@@ -54,3 +54,16 @@ body {
   font-size: 2rem;
   font-weight: bold;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.history {
+  padding-left: 10px;
+}
