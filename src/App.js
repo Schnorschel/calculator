@@ -24,8 +24,10 @@ const App = () => {
       case '–':
         return a - b
       case 'x':
+      case '*':
         return a * b
       case '÷':
+      case '/':
         return a / b
     }
   }
@@ -39,25 +41,16 @@ const App = () => {
     // const val = e.target.value
     switch(val) {
       case 'C': 
+      case 'c':
                 setDisplay('0')
                 setPrevDisplay('0')
                 setOperator('+')
                 break
       case  '+':
-                // setDisplay(prev => {return operate(Number(prevDisplay), Number(prev))})
-                // setPrevDisplay(display)
-                // setOperator(val)
-                // break
       case  '–':
-                // setDisplay(prev => {return operate(Number(prevDisplay), Number(prev))})
-                // setPrevDisplay(display)
-                // setOperator(val)
-                // break
       case  'x':
-                // setDisplay(prev => {return operate(Number(prevDisplay), Number(prev))})
-                // setPrevDisplay(display)
-                // setOperator(val)
-                // break
+      case  '*':
+      case  '/':
       case  '÷':
                 setDisplay(prev => {return operate(Number(prevDisplay), Number(prev))})
                 setPrevDisplay(display)
@@ -104,7 +97,7 @@ const App = () => {
     </section>
     <KeyboardEventHandler
     // handleKeys={'c0123456789+-*/x.'.split('')}
-    handleKeys={['numeric','+','-','/','x','.','shift+plus']}
+    handleKeys={['numeric','+','-','/','x','.','shift+plus','c','*']}
     onKeyEvent={(key, e) => { onKeyClick(key)}}
   />
   </main>
