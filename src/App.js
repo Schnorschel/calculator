@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import KeyPad from './components/KeyPad'
+import KeyboardEventHandler from 'react-keyboard-event-handler'
 
 const App = () => {
   // prettier-ignore
@@ -29,9 +30,13 @@ const App = () => {
     }
   }
 
+  const onKeyClickWrapper = e => {
+    onKeyClick(e.target.value)
+  }
+
   // prettier-ignore
-  const onKeyClick = e => {
-    const val = e.target.value
+  const onKeyClick = val => {
+    // const val = e.target.value
     switch(val) {
       case 'C': 
                 setDisplay('0')
@@ -39,20 +44,20 @@ const App = () => {
                 setOperator('+')
                 break
       case  '+':
-                setDisplay(prev => {return operate(Number(prevDisplay), Number(prev))})
-                setPrevDisplay(display)
-                setOperator(val)
-                break
+                // setDisplay(prev => {return operate(Number(prevDisplay), Number(prev))})
+                // setPrevDisplay(display)
+                // setOperator(val)
+                // break
       case  '–':
-                setDisplay(prev => {return operate(Number(prevDisplay), Number(prev))})
-                setPrevDisplay(display)
-                setOperator(val)
-                break
+                // setDisplay(prev => {return operate(Number(prevDisplay), Number(prev))})
+                // setPrevDisplay(display)
+                // setOperator(val)
+                // break
       case  'x':
-                setDisplay(prev => {return operate(Number(prevDisplay), Number(prev))})
-                setPrevDisplay(display)
-                setOperator(val)
-                break
+                // setDisplay(prev => {return operate(Number(prevDisplay), Number(prev))})
+                // setPrevDisplay(display)
+                // setOperator(val)
+                // break
       case  '÷':
                 setDisplay(prev => {return operate(Number(prevDisplay), Number(prev))})
                 setPrevDisplay(display)
@@ -92,11 +97,16 @@ const App = () => {
           key={k.label}
           className={'calcKey ' + k.width} 
           label={k.label}
-          handleKeyClick={onKeyClick}
+          handleKeyClick={onKeyClickWrapper}
           value={k.label}
         />
       })}
     </section>
+    <KeyboardEventHandler
+    // handleKeys={'c0123456789+-*/x.'.split('')}
+    handleKeys={['numeric','+','-','/','x','.','shift+plus']}
+    onKeyEvent={(key, e) => { onKeyClick(key)}}
+  />
   </main>
   )
 }
