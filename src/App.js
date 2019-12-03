@@ -21,7 +21,7 @@ const App = () => {
     switch (operator) {
       case '+':
         return a + b
-      case '–': // this is an en-dash
+      case '–': // this is an en-dash, looks nicer on the calculator key than a hyphen
       case '-':
         return a - b
       case 'x':
